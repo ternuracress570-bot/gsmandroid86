@@ -54,11 +54,11 @@ interface GatewayContextType {
 
 const DEFAULT_CONFIG: GatewayConfig = {
   host: "103.82.193.58",
-  ariPort: "8088",
-  ariUser: "asterisk",
-  ariPassword: "asterisk",
-  sipExtension: "100",
-  sipPassword: "",
+  ariPort: "5060",
+  ariUser: "androidgsm",
+  ariPassword: "abc123123",
+  sipExtension: "androidgsm",
+  sipPassword: "abc123123",
   appName: "gsm-gateway",
   useWss: false,
 };

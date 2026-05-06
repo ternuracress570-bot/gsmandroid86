@@ -183,21 +183,21 @@ export default function SettingsScreen() {
           label="ARI Port"
           value={local.ariPort}
           onChangeText={(t) => update("ariPort", t)}
-          placeholder="8088"
+          placeholder="5060"
           keyboardType="numeric"
-          hint="Default: 8088 (HTTP) or 8089 (HTTPS)"
+          hint="Current target uses SIP port 5060"
         />
         <Field
           label="ARI Username"
           value={local.ariUser}
           onChangeText={(t) => update("ariUser", t)}
-          placeholder="asterisk"
+          placeholder="androidgsm"
         />
         <Field
           label="ARI Password"
           value={local.ariPassword}
           onChangeText={(t) => update("ariPassword", t)}
-          placeholder="password"
+          placeholder="abc123123"
           secureTextEntry
         />
         <Field
@@ -226,15 +226,14 @@ export default function SettingsScreen() {
           label="Extension"
           value={local.sipExtension}
           onChangeText={(t) => update("sipExtension", t)}
-          placeholder="100"
-          keyboardType="phone-pad"
+          placeholder="androidgsm"
           hint="Your SIP extension registered on Asterisk"
         />
         <Field
           label="SIP Password"
           value={local.sipPassword}
           onChangeText={(t) => update("sipPassword", t)}
-          placeholder="secret"
+          placeholder="abc123123"
           secureTextEntry
         />
       </View>
