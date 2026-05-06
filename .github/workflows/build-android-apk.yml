@@ -50,13 +50,18 @@ jobs:
         working-directory: artifacts/mobile/android
         run: chmod +x gradlew
 
-      - name: Build debug APK
+      - name: Build optimized release APK (arm64)
         working-directory: artifacts/mobile/android
-        run: ./gradlew assembleDebug --no-daemon
+        run: |
+          ./gradlew :app:assembleRelease \
+            -PreactNativeArchitectures=arm64-v8a \
+            -Pandroid.enableMinifyInReleaseBuilds=true \
+            -Pandroid.enableShrinkResourcesInReleaseBuilds=true \
+            --no-daemon
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gsm-android-debug-apk
-          path: artifacts/mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          name: gsm-android-release-apk-arm64
+          path: artifacts/mobile/android/app/build/outputs/apk/release/app-arm64-v8a-release.apk
           if-no-files-found: error
