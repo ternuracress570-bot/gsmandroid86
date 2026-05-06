@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "h5aFuyiiNExKEeTinR5u3"
+uri = "file://artifacts/mobile/assets/images/icon.png"
+type = "image"
+title = "gsm_sip_gateway_icon"
