@@ -31,11 +31,39 @@ sed -n '1,360p' /etc/asterisk/extensions.conf
 ## Findings on current VPS
 - SIP transport is active on UDP `0.0.0.0:5060` (from `pjsip.conf`).
 - Existing PJSIP endpoints: `1001`, `1002`, `3001`.
-- HTTP/ARI server is currently disabled (`http show status` => `Server Disabled`).
-- ARI users list is empty (`ari show users`).
+- ARI is enabled and bound on TCP `0.0.0.0:5060`.
+- ARI user is configured: `androidgsm` / `abc123123`.
+
+## Applied ARI configuration (completed)
+
+`/etc/asterisk/http.conf`
+```ini
+[general]
+enabled=yes
+bindaddr=0.0.0.0
+bindport=5060
+```
+
+`/etc/asterisk/ari.conf`
+```ini
+[general]
+enabled = yes
+pretty = yes
+
+[androidgsm]
+type = user
+read_only = no
+password = abc123123
+password_format = plain
+```
+
+### Verification
+- `asterisk -rx 'http show status'` => `Server Enabled and Bound to 0.0.0.0:5060`
+- `asterisk -rx 'ari show users'` => user `androidgsm` exists.
+- External HTTP test: `GET http://103.82.193.58:5060/ari/asterisk/info` with Basic Auth returns `200`.
+- Backup files saved at `/root/asterisk-backup-20260506-104045`.
 
 ## Important compatibility note
 This mobile app currently uses ARI WebSocket/HTTP APIs (`/ari/events` and `/ari/...`), not SIP signaling directly.
-- If ARI remains disabled, app connection status will fail even if SIP 5060 is reachable.
-- To use this app as-is, ARI must be enabled and an ARI user must exist.
+- ARI is now enabled for this VPS and ready for app connection.
 - If you want SIP-only over 5060, the app architecture must be rewritten to use a SIP stack.
